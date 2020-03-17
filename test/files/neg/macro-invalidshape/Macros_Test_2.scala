@@ -1,4 +1,3 @@
-import scala.language.experimental.macros
 object Macros {
   def foo1(x: Any) = macro 2
   def foo2(x: Any) = macro Impls.foo(null)(null)

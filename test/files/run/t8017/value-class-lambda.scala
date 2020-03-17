@@ -1,4 +1,3 @@
-// scalac: -Ydelambdafy:method
 object Test {
   def testC: Unit = {
     val f1 = (c: C) => c.value

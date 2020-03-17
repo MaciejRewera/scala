@@ -1,4 +1,3 @@
-// scalac: -Ydelambdafy:inline
 object Test {
   def f1(clazz: Class[_]) = (
     clazz.getDeclaredFields.toList

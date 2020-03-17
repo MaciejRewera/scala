@@ -1,4 +1,3 @@
-import scala.language.experimental.macros
 object Test extends App {
   val c1 = new A with C {}
   val c2 = new C with A {}

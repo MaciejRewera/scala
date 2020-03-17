@@ -1,3 +1,4 @@
+import scala.language.higherKinds
 import scala.reflect.runtime.universe._
 
 class C {

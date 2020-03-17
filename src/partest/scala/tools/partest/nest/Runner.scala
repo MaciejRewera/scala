@@ -46,6 +46,9 @@ case class TestInfo(testFile: File) {
   /** pos/t1234.check */
   val checkFile: File = testFile.changeExtension("check")
 
+  /** pos/t1234.flags */
+  val flagsFile: File = testFile.changeExtension("flags")
+
   // outputs
 
   /** pos/t1234-pos.log */
@@ -459,37 +462,38 @@ class Runner(val testInfo: TestInfo, val suiteRunner: AbstractRunner) {
     state
   }
 
-  // all sources in a round may contribute flags via // scalac: -flags
+  // snort or scarf all the contributing flags files
   def flagsForCompilation(sources: List[File]): List[String] = {
-    val perFile = toolArgsFor(sources)("scalac")
-    if (parentFile.getParentFile.getName == "macro-annot") "-Ymacro-annotations" :: perFile
-    else perFile
+    val perKind  = readOptionsFile(testFile.getParentFile.changeExtension("flags"))
+    val perTest  = readOptionsFile(flagsFile)
+    val perGroup = if (testFile.isDirectory) sources.flatMap(f => readOptionsFile(f.changeExtension("flags"))) else Nil
+    val perFile  = toolArgsFor(sources)("scalac")
+    //println(s"flags $perKind/$perGroup/$perTest/$perFile")
+    perKind ++ perGroup ++ perTest ++ perFile
   }
 
   // inspect sources for tool args
   def toolArgs(tool: String, split: Boolean = true): List[String] =
     toolArgsFor(sources(testFile))(tool, split)
 
-  // inspect given files for tool args of the form `tool: args`
-  // if args string ends in close comment, drop the `*` `/`
-  // if split, parse the args string as command line.
-  //
+  // inspect given files for tool args
   def toolArgsFor(files: List[File])(tool: String, split: Boolean = true): List[String] = {
+    def argsplitter(s: String) = if (split) words(s) filter (_.nonEmpty) else List(s)
     def argsFor(f: File): List[String] = {
-      import scala.jdk.OptionConverters._
-      import scala.tools.cmd.CommandLineParser.tokenize
-      import scala.util.Using
+      import scala.util.matching.Regex
+      val p    = new Regex(s"(?:.*\\s)?${tool}:(?:\\s*)(.*)?", "args")
       val max  = 10
-      val tag  = s"$tool:"
-      val endc = "*" + "/"    // be forgiving of /* scalac: ... */
-      def stripped(s: String) = s.substring(s.indexOf(tag) + tag.length).stripSuffix(endc)
-      def argsplitter(s: String) = if (split) tokenize(s) else List(s.trim())
-      val args = Using.resource(Files.lines(f.toPath, codec.charSet))(
-        _.limit(max).filter(_.contains(tag)).map(stripped).findAny.toScala
-      )
-      args.map(argsplitter).getOrElse(Nil)
+      val src  = Path(f).toFile.chars(codec)
+      val args = try {
+        src.getLines take max collectFirst {
+          case s if (p findFirstIn s).nonEmpty => for (m <- p findFirstMatchIn s) yield m group "args"
+        }
+      } finally src.close()
+      val parsed = args.flatten map argsplitter getOrElse Nil
+      // be forgiving of /* scalac: ... */
+      if (parsed.lastOption contains "*/") parsed.init else parsed
     }
-    files.flatMap(argsFor)
+    files flatMap argsFor
   }
 
   abstract class CompileRound {

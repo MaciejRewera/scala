@@ -1,4 +1,3 @@
-// scalac: -Xlint:deprecation
 object Test extends App {
   def f(xs: Array[Int]): Boolean = xs.isInstanceOf[scala.collection.immutable.Seq[_]]
   def g(xs: Int*): Boolean = xs.isInstanceOf[scala.collection.immutable.Seq[_]]

@@ -1,5 +1,3 @@
-// scalac: -opt:l:inline -opt-inline-from:**
-//
 // Since 1.0.18, partest does mixed compilation only in two stages 
 //   1. scalac *.scala *.java
 //   2. javac *.java

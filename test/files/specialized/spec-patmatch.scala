@@ -1,4 +1,3 @@
-// scalac: -opt:l:none
 class Foo[@specialized A] {
   def test(x: A) = println(x match {
    case _: Boolean => "bool"

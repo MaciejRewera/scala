@@ -1,5 +1,4 @@
 package scala.collection.slick
-import scala.language.experimental.macros
 
 object QueryableMacros{
   def map[T:c.WeakTypeTag, S:c.WeakTypeTag]

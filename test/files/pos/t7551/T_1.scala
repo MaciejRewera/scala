@@ -1,4 +1,3 @@
-// scalac: -Werror
 package p
 
 @A(subInterface = classOf[T.S])

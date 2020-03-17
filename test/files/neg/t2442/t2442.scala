@@ -1,4 +1,3 @@
-// scalac: -Werror
 class Test {
   import MyEnum._
 

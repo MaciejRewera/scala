@@ -1,6 +1,5 @@
-import scala.language.experimental.macros
-import scala.reflect.macros.blackbox.Context
 import scala.reflect.runtime.universe._
+import scala.reflect.macros.blackbox.Context
 
 object Impls {
   def foo_targs[T, U: c.WeakTypeTag](c: Context = null)(x: c.Expr[Int] = null) = {

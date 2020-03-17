@@ -42,5 +42,4 @@ class CommandLineParserTest {
     assertThrows[ParseException](tokenize(""""x"""))         // was assertEquals(List("\"x"), tokenize(""""x"""))
     assertThrows[ParseException](tokenize("""x'"""))
   }
-  @Test def leadingSpaces(): Unit = assertEquals(List("text"), tokenize(" text"))
 }

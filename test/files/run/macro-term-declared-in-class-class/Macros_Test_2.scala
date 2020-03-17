@@ -1,4 +1,3 @@
-import scala.language.experimental.macros
 class Macros {
   class Macros {
     def foo: Unit = macro Impls.foo

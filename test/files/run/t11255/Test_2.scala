@@ -1,4 +1,3 @@
-// scalac: -opt:l:inline -opt-inline-from:**
 object Test {
   def serializeDeserialize(obj: Object): Object = {
     import java.io._

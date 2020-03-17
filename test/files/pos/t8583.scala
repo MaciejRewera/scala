@@ -1,5 +1,3 @@
-import language.implicitConversions
-
 class t8583 {
 
   case class A( value: Double ) {

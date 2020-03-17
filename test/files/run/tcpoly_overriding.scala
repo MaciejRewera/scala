@@ -1,4 +1,5 @@
 
+import scala.language.{ higherKinds }
 
 abstract class A[t[x]] {
   def b: t[Int]

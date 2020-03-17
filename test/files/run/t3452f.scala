@@ -1,3 +1,4 @@
+import language.higherKinds
 
 trait GenSet[A]
 

@@ -1,3 +1,4 @@
+import language.higherKinds
 
 object Test extends App {
 

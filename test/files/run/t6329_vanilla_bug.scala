@@ -1,6 +1,8 @@
-@deprecated("Suppress warnings", since="2.11")
+import scala.reflect.runtime.universe._
+import scala.reflect.runtime._
+import scala.reflect.ClassManifest
+
 object Test extends App {
-  import scala.reflect.ClassManifest
   println(implicitly[ClassManifest[List[_]]])
   println(scala.reflect.classTag[List[_]])
 }

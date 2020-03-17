@@ -1,5 +1,5 @@
 
-import scala.language.implicitConversions
+import scala.language.{ higherKinds, implicitConversions }
 
 trait Fooable[T]
 object Fooable {

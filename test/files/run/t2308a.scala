@@ -1,4 +1,5 @@
 
+import scala.language.{ higherKinds }
 object Test {
   trait T[M[_]]
 

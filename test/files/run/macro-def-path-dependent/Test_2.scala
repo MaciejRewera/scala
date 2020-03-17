@@ -1,6 +1,5 @@
 package test2
 
-import scala.language.experimental.macros
 import scala.reflect.macros.blackbox.Context
 
 trait Exprs {

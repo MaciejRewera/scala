@@ -1,3 +1,4 @@
+import scala.language.higherKinds
 
 class D[T]
 

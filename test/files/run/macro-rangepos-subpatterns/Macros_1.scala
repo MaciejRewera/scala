@@ -1,4 +1,3 @@
-// scalac: -Yrangepos
 import scala.reflect.macros.whitebox.Context
 import language.experimental.macros
 

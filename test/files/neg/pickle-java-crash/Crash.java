@@ -1,4 +1,3 @@
-// scalac: -Ypickle-java
 package crashy;
 
 public class Crash {

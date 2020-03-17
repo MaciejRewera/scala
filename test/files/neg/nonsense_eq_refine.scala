@@ -1,4 +1,3 @@
-// scalac: -Werror
 class E
 class SE extends Serializable
 

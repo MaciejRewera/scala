@@ -1,4 +1,3 @@
-// scalac: -Yrangepos
 object Test {
   Macro {
     "".reverse

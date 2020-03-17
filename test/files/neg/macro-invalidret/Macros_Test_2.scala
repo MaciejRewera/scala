@@ -1,4 +1,3 @@
-// scalac: -Xlint:deprecation -Werror
 import language.experimental.macros
 
 object Macros {

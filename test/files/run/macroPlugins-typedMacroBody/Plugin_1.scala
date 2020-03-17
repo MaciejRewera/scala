@@ -1,4 +1,3 @@
-// scalac: -Yrangepos:false
 package typedMacroBody
 
 import scala.tools.nsc.Global
